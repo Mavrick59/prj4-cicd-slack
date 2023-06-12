@@ -1,0 +1,11 @@
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/service/UserDetailsServiceImpl.java
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/model/User.java
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/service/SecurityServiceImpl.java
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/service/UserService.java
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/service/UserServiceImpl.java
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/controller/UserController.java
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/repository/RoleRepository.java
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/validator/UserValidator.java
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/model/Role.java
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/service/SecurityService.java
+/root/newproject4/vprofile-project-ci-jenkins/src/main/java/com/visualpathit/account/repository/UserRepository.java
