@@ -1,0 +1,72 @@
+pipeline {
+	agent any
+  
+	  stages{
+		  stage('GIT CHECKOUT') {
+			  steps {
+				checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/abhinav299/prt4.git']])
+			  }
+		  }
+		  stage('BUILD') {
+			  steps {
+				 sh 'mvn clean package'
+			  }
+		  }
+  
+		  stage('DEPLOT TO TOMCAT') {
+			  steps {
+				 deploy adapters: [tomcat9(credentialsId: 'f4f23d72-0be2-44ec-9623-fcb9fc830daa', path: '', url: 'http://65.1.136.187:8080/')], contextPath: 'target', war: '**/*.war'
+			  }
+		  }
+		  stage('SLACK MESSAGING TOOL'){
+			  steps{
+				slackSend(channel: '#marvick21', message: "Message From Jenkins ${env.JOB_NAME} ${env.BUILD_NUMBER} ${env.BUILD_URL}")
+
+			  }
+	    }
+    
+	       stage('STATIC CODE ANALYSIS'){
+
+		     steps{
+
+			         withSonarQubeEnv('sonar') { 
+
+				       sh 'mvn sonar:sonar' 
+			
+				}
+			}               
+		}
+
+		   stage('NEXUS'){
+
+	               steps{   
+	                   
+                    nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: 'target/vprofile-v2.war', type: 'war']], credentialsId: 'f82de082-d000-4bc8-a773-877d756f1cb5', groupId: 'com.visualpathit', nexusUrl: '65.0.26.137:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'com', version: 'v2'
+                        }
+                      
+                }
+	    
+	    }
+	  
+	        post {
+               always {
+                   slackSend(channel: '#marvick21', message: 'Pipeline finished.')
+        }
+        
+                success {
+                  slackSend(channel: '#marvick21', message: 'Pipeline succeeded!')
+        }
+        
+                failure {
+                    slackSend(channel: '#marvick21', message: 'Pipeline failed.')
+                }
+      
+        }
+   }
+		 	
+		 	
+				
+			 
+		
+	
+			
